@@ -5,9 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>BuyCoins Challenge</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="/main.min.js"></script>
   </head>
-  <body>
+  <body class="loading">
     <header class="header" role="banner">
       <div class="header-item logo">
         <a class="header-link" href="#" aria-label="Homepage">
@@ -133,10 +132,9 @@
       <div class="header-item profile">
         <div class="header-link summary" aria-label="View profile and more">
           <img
-            alt="@tewshi"
+            id="header-avatar"
             width="20"
             height="20"
-            src="https://avatars2.githubusercontent.com/u/5625068?s=60&amp;v=4"
             class="avatar avatar-user"
           />
           <span class="dropdown-caret"></span>
@@ -182,7 +180,9 @@
                       ></path>
                     </svg>
                     Repositories
-                    <span title="26" class="counter">26</span>
+                    <span title="26" id="repositories-count" class="counter"
+                      >26</span
+                    >
                   </a>
                   <a class="nav-item" href="#">
                     <svg
@@ -199,7 +199,7 @@
                       ></path>
                     </svg>
                     Projects
-                    <span title="1" class="counter">1</span>
+                    <span id="projects-count" title="1" class="counter">1</span>
                   </a>
                   <a class="nav-item" href="#">
                     <svg
@@ -231,11 +231,7 @@
                   <div class="wrapper">
                     <div class="picture">
                       <a href="#">
-                        <img
-                          class="avatar avatar-user"
-                          src="https://avatars1.githubusercontent.com/u/5625068?s=460&u=ba1704e0265f46c8993779b5e2f1cb46f1a91b06&v=4"
-                          alt=""
-                        />
+                        <img id="h-card-avatar" class="avatar avatar-user" />
                       </a>
                       <div class="user-status-container">
                         <div class="user-status-circle-badge-container">
@@ -243,19 +239,13 @@
                             <div>
                               <div class="user-status-inner">
                                 <div>
-                                  <div class="user-status-emoji-container">
-                                    <div>
-                                      <g-emoji
-                                        class="g-emoji"
-                                        fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3af.png"
-                                      >
-                                        🎯
-                                      </g-emoji>
-                                    </div>
-                                  </div>
+                                  <div
+                                    class="user-status-emoji-container"
+                                    id="status-emoji"
+                                  ></div>
                                 </div>
                                 <div class="user-status-text">
-                                  <div>Focusing</div>
+                                  <div id="status-text"></div>
                                 </div>
                               </div>
                             </div>
@@ -265,21 +255,51 @@
                     </div>
                     <div class="vcard-names-container">
                       <h1 class="vcard-names">
-                        <span class="vcard-fullname">Joseph Michael</span>
-                        <span class="vcard-username">tewshi</span>
+                        <span id="vcard-fullname" class="vcard-fullname"></span>
+                        <span id="vcard-username" class="vcard-username"></span>
                       </h1>
                     </div>
-                    <div class="user-profile-bio">
-                      <div>Software Engineer, Programmer and Teacher.</div>
-                    </div>
+                    <div id="user-profile-bio" class="user-profile-bio"></div>
                   </div>
                 </div>
               </div>
-              <div class="width-9"></div>
+              <div class="width-9">
+                <div class="main-content">
+                  <div class="main-search-wrapper">
+                    <form>
+                      <div class="main-search-input-wrapper">
+                        <input
+                          type="search"
+                          name="q"
+                          placeholder="Find a repository…"
+                          autocomplete="off"
+                          aria-label="Find a repository…"
+                        />
+                      </div>
+                    </form>
+                  </div>
+                  <div class="repositories">
+                    <ul id="repositories-wrapper"></ul>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </main>
+    </div>
+
+    <div id="loader">
+      <div>
+        <div class="sk-chase">
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

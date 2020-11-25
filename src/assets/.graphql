@@ -1,12 +1,17 @@
-{
+query {
   user(login: "tewshi") {
     avatarUrl
     name
     login
     bio
+    bioHTML
     status {
       emoji
+      emojiHTML
       message
+    }
+    projects {
+      totalCount
     }
     repositories(first: 20) {
       totalCount
@@ -22,6 +27,9 @@
         stargazerCount
         forkCount
         viewerHasStarred
+        isPrivate
+        description
+        descriptionHTML
       }
     }
   }

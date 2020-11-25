@@ -1,0 +1,28 @@
+{
+  user(login: "tewshi") {
+    avatarUrl
+    name
+    login
+    bio
+    status {
+      emoji
+      message
+    }
+    repositories(first: 20) {
+      totalCount
+      nodes {
+        updatedAt
+        name
+        url
+        primaryLanguage {
+          color
+          id
+          name
+        }
+        stargazerCount
+        forkCount
+        viewerHasStarred
+      }
+    }
+  }
+}

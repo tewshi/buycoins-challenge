@@ -7,13 +7,18 @@ import { loader } from 'graphql.macro'
 
 const dayjs = require('dayjs')
 const relativeTime = require('dayjs/plugin/relativeTime')
+// extend so we can call dayjs(...).fromNow()
 dayjs.extend(relativeTime)
 
+// load graphql query from file
 const query = loader('./assets/.graphql')
 
 const token = process.env.ACCESS_TOKEN
 const baseUrl = process.env.API_URL
 
+/**
+ * Query the girhub graphql endpoint
+ */
 const fetchData = () => {
   fetch(baseUrl, {
     method: 'POST',
@@ -24,6 +29,7 @@ const fetchData = () => {
     .then((body) => body.data)
     .then((data) => data.user)
     .then((user) => {
+      // find all the elements by their ID and modify their content
       const headerAvatar = document.getElementById('header-avatar')
       const headerUserLogin = document.getElementById('header-user-login')
       const hCardAvatar = document.getElementById('h-card-avatar')
@@ -57,9 +63,11 @@ const fetchData = () => {
       repositoriesCounter2.innerText = user.repositories.totalCount
       projectsCounter2.innerText = user.projects.totalCount
 
+      // use fragment to prevent multiple DOM redraws
       const fragment = document.createDocumentFragment()
       const repositories = user.repositories.nodes || []
 
+      // add each repositofy to the list
       repositories.forEach((repo, i) => {
         const el = document.createElement('li')
         const nameWrap = document.createElement('div')
@@ -170,6 +178,7 @@ const fetchData = () => {
 
       repos.appendChild(fragment)
 
+      // remove loading class so app renders everything at once
       document.body.classList.remove('loading')
       setTimeout(() => {
         document.body.classList.add('done')
@@ -182,10 +191,12 @@ const fetchData = () => {
 }
 
 window.onload = (ev) => {
+  // fetch data from api on window load
   fetchData()
   const header = document.getElementById('header')
   const hamburger = document.getElementById('hamburger')
 
+  // expand and collapse hamburger menu on mobile
   hamburger.addEventListener('click', (ev) => {
     ev.preventDefault()
     ev.stopPropagation()
@@ -194,7 +205,9 @@ window.onload = (ev) => {
 }
 
 window.onresize = (ev) => {
-  if (window.innerWidth >= 768) {
-    document.getElementById('header').classList.remove('nav-open')
+  const header = document.getElementById('header')
+  if (window.innerWidth >= 768 && header.classList.contains('nav-open')) {
+    // remove class for tablets and Pcs
+    header.classList.remove('nav-open')
   }
 }

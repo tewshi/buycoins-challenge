@@ -1,7 +1,7 @@
 /** @format */
 
-import './reset.css'
-import './main.css'
+import './assets/reset.css'
+import './assets/main.css'
 
 import { loader } from 'graphql.macro'
 
@@ -9,7 +9,7 @@ const dayjs = require('dayjs')
 const relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
 
-const query = loader('.graphql')
+const query = loader('./assets/.graphql')
 
 const token = process.env.ACCESS_TOKEN
 const baseUrl = process.env.API_URL
@@ -25,27 +25,37 @@ const fetchData = () => {
     .then((data) => data.user)
     .then((user) => {
       const headerAvatar = document.getElementById('header-avatar')
+      const headerUserLogin = document.getElementById('header-user-login')
       const hCardAvatar = document.getElementById('h-card-avatar')
       const hCardEmoji = document.getElementById('status-emoji')
       const hCardText = document.getElementById('status-text')
+      const hCardEmoji2 = document.getElementById('status-emoji-2')
+      const hCardText2 = document.getElementById('status-text-2')
       const hCardName = document.getElementById('vcard-fullname')
       const hCardLogin = document.getElementById('vcard-username')
       const hCardBio = document.getElementById('user-profile-bio')
       const repositoriesCounter = document.getElementById('repositories-count')
       const projectsCounter = document.getElementById('projects-count')
+      const repositoriesCounter2 = document.getElementById('repositories-count-2')
+      const projectsCounter2 = document.getElementById('projects-count-2')
       const repos = document.getElementById('repositories-wrapper')
 
       headerAvatar.src = user.avatarUrl
       headerAvatar.alt = `@${user.login}`
+      headerUserLogin.innerText = `${user.login}`
       hCardAvatar.src = user.avatarUrl
       hCardAvatar.alt = `@${user.login}`
       hCardEmoji.innerHTML = user.status.emojiHTML
+      hCardEmoji2.innerHTML = user.status.emojiHTML
       hCardText.innerText = user.status.message
+      hCardText2.innerText = user.status.message
       hCardName.innerText = user.name
       hCardLogin.innerText = user.login
       hCardBio.innerHTML = user.bioHTML
       repositoriesCounter.innerText = user.repositories.totalCount
       projectsCounter.innerText = user.projects.totalCount
+      repositoriesCounter2.innerText = user.repositories.totalCount
+      projectsCounter2.innerText = user.projects.totalCount
 
       const fragment = document.createDocumentFragment()
       const repositories = user.repositories.nodes || []
@@ -58,7 +68,7 @@ const fetchData = () => {
         const repoLabel = document.createElement('span')
         const repoName = document.createElement('a')
         nameHeadOuter.classList.add('repository-name')
-        nameWrap.classList.add('width-10', 'width-lg-9')
+        nameWrap.classList.add('width-9')
         repoName.innerText = repo.name
         repoName.setAttribute('href', repo.url)
 
@@ -129,7 +139,7 @@ const fetchData = () => {
         const actionsOuterWrap = document.createElement('div')
         const actionsForm = document.createElement('form')
         const actionsButton = document.createElement('button')
-        actionsWrap.classList.add('width-2', 'width-lg-3')
+        actionsWrap.classList.add('width-3')
         actionsOuter.classList.add('repository-actions')
         actionsButton.setAttribute('type', 'button')
         actionsButton.classList.add('btn', 'btn-sm')
@@ -171,4 +181,20 @@ const fetchData = () => {
     })
 }
 
-fetchData()
+window.onload = (ev) => {
+  fetchData()
+  const header = document.getElementById('header')
+  const hamburger = document.getElementById('hamburger')
+
+  hamburger.addEventListener('click', (ev) => {
+    ev.preventDefault()
+    ev.stopPropagation()
+    header.classList.toggle('nav-open')
+  })
+}
+
+window.onresize = (ev) => {
+  if (window.innerWidth >= 768) {
+    document.getElementById('header').classList.remove('nav-open')
+  }
+}

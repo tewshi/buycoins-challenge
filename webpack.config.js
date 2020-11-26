@@ -12,7 +12,7 @@ dotenv.config({ path: './.env' })
 
 module.exports = {
   mode: 'production',
-  entry: './src/assets/main.js',
+  entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.min.js',

@@ -1,6 +1,10 @@
 # buycoins-challenge
 BuyCoins frontend challenge
 
+## Demo
+[https://buycoins-frontend-challenge.netlify.app/](https://buycoins-frontend-challenge.netlify.app/)
+
+
 Clone repo
 ```bash
 git clone https://github.com/tewshi/buycoins-challenge.git
@@ -31,6 +35,3 @@ yarn global add serve
 
 serve dist -n
 ```
-
-## Demo
-[https://buycoins-frontend-challenge.netlify.app/](https://buycoins-frontend-challenge.netlify.app/)

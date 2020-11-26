@@ -116,9 +116,19 @@ a.header-link span {
 }
 
 .logo {
-  display: none;
   margin-top: -4px;
   margin-bottom: -4px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.logo a.header-link {
+  display: block;
+}
+
+.logo a.header-link,
+.header-item.sm-only-flex a.header-link {
+  border-top: none;
 }
 
 .header-item > a.header-link,
@@ -156,6 +166,11 @@ a.header-link span {
   margin-right: 0;
   flex-direction: column;
   width: 100%;
+}
+
+.nav-open .search-nav-wrapper,
+.nav-open .profile {
+  display: flex;
 }
 
 .header-search {
@@ -294,6 +309,10 @@ nav {
   padding-left: 8px;
 }
 
+.main .sticky nav {
+  flex-direction: row;
+}
+
 .sticky nav {
   display: flex;
   overflow-x: auto;
@@ -359,7 +378,7 @@ nav {
 
 .h-card .wrapper {
   display: flex;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
   align-items: center;
 }
 
@@ -380,20 +399,23 @@ nav {
   max-width: 100%;
 }
 
+.h-card .wrapper .picture .user-status-container {
+  display: none;
+}
+
+.h-card .wrapper > .user-status-container {
+  display: block;
+}
+
 .h-card .wrapper .user-status-container {
   position: relative;
 }
 
 .h-card .wrapper .user-status-circle-badge-container {
   font-size: 14px;
-  position: absolute;
-  bottom: 0;
-  left: 100%;
-  width: 38px;
+  position: relative;
   height: 38px;
-  margin-bottom: 32px;
-  margin-left: -40px;
-  z-index: 2;
+  margin-bottom: 12px;
 }
 
 .h-card .wrapper .user-status-circle-badge-container:hover {
@@ -443,12 +465,9 @@ nav {
 }
 
 .h-card .wrapper .user-status-inner .user-status-text {
-  width: 0;
-  min-width: 0;
   padding-top: 0;
   overflow: hidden;
   line-height: 20px;
-  opacity: 0;
   transition: 0.1s ease;
   color: var(--color-text-primary);
   white-space: normal;
@@ -499,6 +518,7 @@ nav {
 
 .main-content {
   position: relative;
+  padding-right: 16px;
 }
 
 .main-search-wrapper {
@@ -680,6 +700,28 @@ nav {
   width: 83.33333%;
 }
 
+.width-12 {
+  width: 100%;
+}
+
+.sm-only {
+  display: block;
+}
+
+.sm-only-inline {
+  display: inline-block;
+}
+
+.sm-only-flex {
+  display: flex;
+}
+
+.md-only,
+.md-only-inline,
+.md-only-flex {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .header {
     flex-wrap: nowrap;
@@ -701,7 +743,8 @@ nav {
   }
 
   .logo {
-    display: flex;
+    margin-right: 16px;
+    margin-left: 0;
   }
 
   .hamburger {
@@ -743,6 +786,10 @@ nav {
     flex-direction: row;
   }
 
+  .main-content {
+    padding-right: 0;
+  }
+
   .h-card {
     margin-top: -32px;
   }
@@ -755,6 +802,30 @@ nav {
   .h-card .wrapper .picture {
     display: inline-block;
     margin-right: 0;
+  }
+
+  .h-card .wrapper .user-status-circle-badge-container {
+    position: absolute;
+    bottom: 0;
+    left: 100%;
+    width: 38px;
+    margin-bottom: 32px;
+    margin-left: -40px;
+    z-index: 2;
+  }
+
+  .h-card .wrapper .picture .user-status-container {
+    display: block;
+  }
+
+  .h-card .wrapper > .user-status-container {
+    display: none;
+  }
+
+  .h-card .wrapper .user-status-inner .user-status-text {
+    width: 0;
+    min-width: 0;
+    opacity: 0;
   }
 
   .vcard-names-container {
@@ -784,6 +855,28 @@ nav {
 
   .width-md-10 {
     width: 83.33333%;
+  }
+
+  .width-md-12 {
+    width: 100%;
+  }
+
+  .sm-only,
+  .sm-only-inline,
+  .sm-only-flex {
+    display: none;
+  }
+
+  .md-only {
+    display: block;
+  }
+
+  .md-only-inline {
+    display: inline-block;
+  }
+
+  .md-only-flex {
+    display: flex;
   }
 }
 
@@ -829,6 +922,10 @@ nav {
 
   .width-lg-10 {
     width: 83.33333%;
+  }
+
+  .width-lg-12 {
+    width: 100%;
   }
 }
 

@@ -105,8 +105,8 @@ const fetchData = () => {
         const detailsLang = document.createElement('span')
         detailsOuter.classList.add('repository-details')
         detailsLangColor.classList.add('repo-language-color')
-        detailsLangColor.setAttribute('style', `background-color: ${repo.primaryLanguage.color}`)
-        detailsLang.innerText = repo.primaryLanguage.name
+        detailsLangColor.setAttribute('style', `background-color: ${(repo.primaryLanguage && repo.primaryLanguage.color) || '#000'}`)
+        detailsLang.innerText = (repo.primaryLanguage && repo.primaryLanguage.name) || 'N/A'
         detailsLangWrap.appendChild(detailsLangColor)
         detailsLangWrap.appendChild(detailsLang)
 
@@ -130,12 +130,22 @@ const fetchData = () => {
         detailsForksWrap.appendChild(detailsForksLink)
         detailsOuter.appendChild(detailsForksWrap)
 
+        const updated = dayjs(repo.updatedAt)
+
         const detailsUpdatedWrap = document.createElement('span')
         const detailsUpdated = document.createElement('relative-time')
         detailsUpdatedWrap.innerHTML = 'Updated&nbsp;'
         detailsUpdated.setAttribute('datetime', repo.updatedAt)
-        detailsUpdated.setAttribute('title', dayjs(repo.updatedAt).format('DD MM YYYY, HH:mm'))
-        detailsUpdated.innerText = dayjs(repo.updatedAt).fromNow()
+        detailsUpdated.setAttribute('title', updated.format('DD MMM YYYY, HH:mm'))
+        if (updated.diff(dayjs(), 'day') < -7) {
+          if (updated.year() === dayjs().year()) {
+            detailsUpdated.innerText = `on ${updated.format('DD MMM')}`
+          } else {
+            detailsUpdated.innerText = `on ${updated.format('DD MMM YYYY')}`
+          }
+        } else {
+          detailsUpdated.innerText = updated.fromNow()
+        }
 
         detailsUpdatedWrap.appendChild(detailsUpdated)
         detailsOuter.appendChild(detailsUpdatedWrap)
